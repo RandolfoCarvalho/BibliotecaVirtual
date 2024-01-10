@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BibliotecaVirtual.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BibliotecaVirtual.Data
 {
@@ -9,5 +10,8 @@ namespace BibliotecaVirtual.Data
         {
 
         }
+
+
+        public DbSet<Livro> Livros { get; set; }
     }
 }
