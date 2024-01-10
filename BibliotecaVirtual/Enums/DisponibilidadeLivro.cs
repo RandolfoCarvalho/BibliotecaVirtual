@@ -2,7 +2,7 @@
 {
     public enum DisponibilidadeLivro
     {
-        Disponivel,
-        Emprestado
+        Disponivel = 1,
+        Emprestado  = 2
     }
 }

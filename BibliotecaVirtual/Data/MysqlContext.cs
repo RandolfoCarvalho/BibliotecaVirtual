@@ -10,8 +10,6 @@ namespace BibliotecaVirtual.Data
         {
 
         }
-
-
         public DbSet<Livro> Livros { get; set; }
     }
 }

@@ -12,5 +12,6 @@ namespace BibliotecaVirtual.Models
 
         public string Sinopse { get; set; }
         public DisponibilidadeLivro Disponibilidade { get; set; }
+
     }
 }

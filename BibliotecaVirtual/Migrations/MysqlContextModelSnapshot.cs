@@ -48,7 +48,7 @@ namespace BibliotecaVirtual.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Livros");
+                    b.ToTable("Livros", (string)null);
                 });
 #pragma warning restore 612, 618
         }
