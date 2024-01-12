@@ -1,4 +1,5 @@
 using BibliotecaVirtual.Data;
+using BibliotecaVirtual.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,8 @@ var connection = builder.Configuration["ConnectionStrings:DefaultConnection"];
 builder.Services.AddDbContext<MysqlContext>(options => options.UseMySql(connection,
     new MySqlServerVersion(
         new Version(8, 0, 0))));
+//Injecao de dependencias
+builder.Services.AddScoped<LivrosService>();
 
 var app = builder.Build();
 

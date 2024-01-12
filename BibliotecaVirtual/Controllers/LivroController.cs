@@ -1,31 +1,39 @@
 ﻿using BibliotecaVirtual.Data;
 using BibliotecaVirtual.Models;
+using BibliotecaVirtual.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BibliotecaVirtual.Controllers
 {
     public class LivroController : Controller
     {
-        public readonly MysqlContext _context;
+        private readonly MysqlContext _context;
+        private readonly LivrosService _service;
 
-        public LivroController(MysqlContext context)
+
+        public LivroController(MysqlContext context, LivrosService livroService)
         {
             _context = context;
+            _service = livroService;
         }
-        [HttpPost]
-        public IActionResult Create([FromBody] Livro livro)
+        //Listar
+        public IActionResult Listar()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            return Ok(_service.FindAll());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Criar([FromBody] Livro livro)
+        {
             if (livro == null)
             {
                 return BadRequest("O livro não pode ser nulo");
             }
-            _context.Add(livro);
-            _context.SaveChanges();
-            return Ok("Livro criado com sucesso");
+            await _service.CriarAsync(livro);
+            return Ok("Livro criado com sucesso " + livro);
         }
+
+        //Editar
+
     }
 }
