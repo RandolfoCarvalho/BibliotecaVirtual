@@ -40,6 +40,11 @@ namespace BibliotecaVirtual.Controllers
             await _service.EditAsync(livro);
             return Ok(livro);
         }
+        public IActionResult Deletar(int id)
+        {
+            _service.Remove(id);
+            return Ok("Livro removido com sucesso");
+        }
 
     }
 }

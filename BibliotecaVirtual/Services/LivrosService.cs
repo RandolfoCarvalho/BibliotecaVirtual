@@ -48,5 +48,11 @@ namespace BibliotecaVirtual.Services
                 throw;
             }
         }
+        public void Remove(int id)
+        {
+            var result = FindById(id);
+            _context.Remove(result);
+            _context.SaveChanges();
+        }
     }
 }
