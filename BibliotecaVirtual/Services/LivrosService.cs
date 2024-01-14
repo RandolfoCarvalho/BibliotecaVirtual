@@ -32,20 +32,21 @@ namespace BibliotecaVirtual.Services
 
         public async Task EditAsync(Livro livro)
         {
-            var result =  _context.Livros.SingleOrDefault(x => x.Id == livro.Id);
-            if (result == null)
+            bool hasAny = await _context.Livros.AnyAsync(p => p.Id == livro.Id);
+            if (!hasAny)
             {
                 throw new KeyNotFoundException("Id not Found");
             }
             try
             {
-                _context.Entry(result).CurrentValues.SetValues(livro);
+                _context.Update(livro);
                 await _context.SaveChangesAsync();
 
             }
             catch (Exception e)
             {
-                throw;
+                //reenviando a exceção em nivel de serviço (a que eu criei na pasta serviços)
+                throw new Exception(e.Message);
             }
         }
         public void Remove(int id)

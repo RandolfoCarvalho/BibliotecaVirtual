@@ -3,6 +3,8 @@ using BibliotecaVirtual.Models;
 using BibliotecaVirtual.Models.ViewModels;
 using BibliotecaVirtual.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BibliotecaVirtual.Controllers
 {
@@ -41,13 +43,36 @@ namespace BibliotecaVirtual.Controllers
             await _service.CriarAsync(livro);
             return Ok("Livro criado com sucesso " + livro);
         }
-
-        //Editar
-        [HttpPut]
-        public async Task<IActionResult> Editar([FromBody] Livro livro)
+        public async Task<IActionResult> Editar(int id)
         {
-            await _service.EditAsync(livro);
-            return Ok(livro);
+            var result = _service.FindById(id);
+            var viewModel = new LivroFormView() { Livro = result};
+            return View(viewModel);
+        }
+        //Editar
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Editar(int? id, Livro livro)
+        {
+            if (!ModelState.IsValid)
+            {
+                //barra a requisição mesmo com o js desabilitado
+                var result = new LivroFormView { Livro = livro };
+                return View(result);
+            }
+            if (id != livro.Id)
+            {
+                return Ok("Erro ao editar o livro");
+            }
+            try
+            {
+                await _service.EditAsync(livro);
+                return RedirectToAction(nameof(Listar));
+            }
+            catch (Exception e)
+            {
+                return Ok("Erro: " + e);
+            }
         }
         public IActionResult Deletar(int id)
         {

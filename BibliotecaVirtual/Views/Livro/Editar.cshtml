@@ -1,0 +1,58 @@
+﻿@*
+
+*@
+@model BibliotecaVirtual.Models.ViewModels.LivroFormView;
+@{
+    ViewData["Title"] = "Criar";
+}
+<h2> @ViewData["Title"] </h2>
+<h4> Livros </h4>
+<hr />
+@*Row garante que a div vai ocupar a largura da tela*@
+<div class="row">
+    @*Usando 1/3 da tela, por que bootstrap divide a tela em 12 partes e 4 é 1/3 da tela*@
+    <div class="col-md-4">
+        <form asp-action="Editar">
+            <input type="hidden" asp-for="Livro.Id" />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                @*Aqui mesmo já esta preenchendo o atributo do tipo Seller do SellerFormViewModel*@
+                <label asp-for="Livro.Name" value="model.Livro.Name" class="control-label"></label>
+                <input asp-for="Livro.Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                @**@
+                <label asp-for="Livro.Genero" value="model.Livro.Genero" class="control-label"></label>
+                <input asp-for="Livro.Genero" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                @**@
+                <label asp-for="Livro.AnoPublicacao" value="model.Livro.AnoPublicacao" class="control-label"></label>
+                <input asp-for="Livro.AnoPublicacao" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                @**@
+                <label asp-for="Livro.NumeroPaginas" value="model.Livro.NumeroPaginas" class="control-label"></label>
+                <input asp-for="Livro.NumeroPaginas" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Livro.Sinopse" value="model.Livro.Sinopse" class="control-label"></label>
+                <input asp-for="Livro.Sinopse" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Livro.Disponibilidade" value="model.Livro.Disponibilidade" class="control-label"></label>
+                <input asp-for="Livro.Disponibilidade" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Editar" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
