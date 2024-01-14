@@ -34,11 +34,11 @@ namespace BibliotecaVirtual.Controllers
         }
 
         //Editar
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> Editar([FromBody] Livro livro)
         {
             await _service.EditAsync(livro);
-            return  new ObjectResult(livro.ToString());
+            return Ok(livro);
         }
 
     }
