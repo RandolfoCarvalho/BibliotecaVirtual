@@ -1,5 +1,6 @@
 ﻿using BibliotecaVirtual.Data;
 using BibliotecaVirtual.Models;
+using BibliotecaVirtual.Models.ViewModels;
 using BibliotecaVirtual.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,10 +23,18 @@ namespace BibliotecaVirtual.Controllers
             return View(_service.FindAll());
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Criar([FromBody] Livro livro)
+        public async Task<IActionResult> Criar()
         {
-            if (livro == null)
+            var viewModel = new LivroFormView();
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        //impedir ataques csrf
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Criar(Livro livro)
+        {
+            if (!ModelState.IsValid)
             {
                 return BadRequest("O livro não pode ser nulo");
             }
