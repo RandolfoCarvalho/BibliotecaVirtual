@@ -52,7 +52,7 @@ namespace BibliotecaVirtual.Controllers
         public IActionResult Deletar(int id)
         {
             _service.Remove(id);
-            return Ok("Livro removido com sucesso");
+            return RedirectToAction(nameof(Listar));
         }
     }
 }

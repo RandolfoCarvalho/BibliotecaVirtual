@@ -7,7 +7,7 @@
 
 }
 <h2> @ViewData["Title"] </h2>
-<p> <a asp-action="Create" class="btn btn-default"> Create New </a></p>
+<p> <a asp-action="Criar" class="btn btn-default"> Criar novo </a></p>
 <table class="table table-dark table-striped-columns">
     <thead>
         <tr class="success">
@@ -38,7 +38,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.OrderByDescending(i => i.Id))
         {
             <tr>
                 <td>
@@ -64,7 +64,7 @@
                     @*Quando algum desses for clicado vai acionar o método do controlador*@
                     <a asp-action="Edit" asp-route-id="@item.Id"> Edit </a>
                     <a asp-action="Details" asp-route-id="@item.Id"> Details </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id"> Delete </a>
+                    <a asp-action="Deletar" asp-route-id="@item.Id"> Delete </a>
                 </td>
             </tr>
         }
