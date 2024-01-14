@@ -19,7 +19,7 @@ namespace BibliotecaVirtual.Controllers
         //Listar
         public IActionResult Listar()
         {
-            return Ok(_service.FindAll());
+            return View(_service.FindAll());
         }
 
         [HttpPost]
@@ -45,6 +45,5 @@ namespace BibliotecaVirtual.Controllers
             _service.Remove(id);
             return Ok("Livro removido com sucesso");
         }
-
     }
 }
