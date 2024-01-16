@@ -24,7 +24,6 @@ namespace BibliotecaVirtual.Controllers
         {
             return View(_service.FindAll());
         }
-
         public async Task<IActionResult> Criar()
         {
             var viewModel = new LivroFormView();
@@ -78,6 +77,19 @@ namespace BibliotecaVirtual.Controllers
         {
             _service.Remove(id);
             return RedirectToAction(nameof(Listar));
+        }
+        public IActionResult Filtro()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Filtro(DateTime DataInicio, DateTime DataFim)
+        {
+            var dadosFiltrados = _context.Livros.Where(p => p
+            .AnoPublicacao >= DataInicio && p
+            .AnoPublicacao <= DataFim).ToList();
+
+            return View(dadosFiltrados);
         }
     }
 }
