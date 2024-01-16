@@ -78,3 +78,8 @@ C:\temp\projetos\BibliotecaVirtual\BibliotecaVirtual\obj\Debug\net7.0\refint\Bib
 C:\temp\projetos\BibliotecaVirtual\BibliotecaVirtual\obj\Debug\net7.0\BibliotecaVirtual.pdb
 C:\temp\projetos\BibliotecaVirtual\BibliotecaVirtual\obj\Debug\net7.0\BibliotecaVirtual.genruntimeconfig.cache
 C:\temp\projetos\BibliotecaVirtual\BibliotecaVirtual\obj\Debug\net7.0\ref\BibliotecaVirtual.dll
+D:\temp\BibliotecaVirtual\BibliotecaVirtual\bin\Debug\net7.0\Humanizer.dll
+D:\temp\BibliotecaVirtual\BibliotecaVirtual\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\temp\BibliotecaVirtual\BibliotecaVirtual\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+D:\temp\BibliotecaVirtual\BibliotecaVirtual\bin\Debug\net7.0\Mono.TextTemplating.dll
+D:\temp\BibliotecaVirtual\BibliotecaVirtual\bin\Debug\net7.0\System.CodeDom.dll
