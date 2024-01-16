@@ -41,7 +41,7 @@ namespace BibliotecaVirtual.Controllers
                 return BadRequest("O livro não pode ser nulo");
             }
             await _service.CriarAsync(livro);
-            return Ok("Livro criado com sucesso " + livro);
+            return RedirectToAction(nameof(Listar));
         }
         public async Task<IActionResult> Editar(int id)
         {
@@ -62,7 +62,7 @@ namespace BibliotecaVirtual.Controllers
             }
             if (id != livro.Id)
             {
-                return Ok("Erro ao editar o livro");
+                return BadRequest("Erro ao editar o livro");
             }
             try
             {
@@ -71,7 +71,7 @@ namespace BibliotecaVirtual.Controllers
             }
             catch (Exception e)
             {
-                return Ok("Erro: " + e);
+                throw;
             }
         }
         public IActionResult Deletar(int id)
