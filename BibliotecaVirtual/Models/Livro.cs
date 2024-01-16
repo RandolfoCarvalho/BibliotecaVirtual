@@ -13,6 +13,7 @@ namespace BibliotecaVirtual.Models
         public string Genero { get; set; }
         [Required(ErrorMessage = "O {0} é obrigatório")]
         [DisplayName("Ano de publicação")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime AnoPublicacao { get; set; }
         [Required(ErrorMessage = "O {0} é obrigatório")]
         [DisplayName("Numero de páginas")]

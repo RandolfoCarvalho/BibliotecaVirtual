@@ -6,6 +6,17 @@
     ViewData["Title"] = "Livros";
 
 }
+<style>
+    .btn-default {
+        background-color: black; 
+        color: white;
+        margin-top: 15px;
+    }
+
+    .btn-default:hover {
+        color: white;
+    }
+</style>
 <h2> @ViewData["Title"] </h2>
 <p> <a asp-action="Criar" class="btn btn-default"> Criar novo </a></p>
 <table class="table table-dark table-striped-columns">
