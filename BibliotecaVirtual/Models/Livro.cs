@@ -8,6 +8,7 @@ namespace BibliotecaVirtual.Models
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "O Nome é obrigatório")]
+        [DisplayName("Nome")]
         public string Name { get; set; }
         [Required(ErrorMessage = "O {0} é obrigatório")]
         public string Genero { get; set; }

@@ -1,0 +1,103 @@
+﻿@*
+
+*@
+@model IEnumerable<BibliotecaVirtual.Models.Livro>
+@{
+    ViewData["Title"] = "Listagem de Livros";
+
+}
+<style>
+    .btn-default {
+        background-color: black;
+        color: white;
+        margin-top: 15px;
+    }
+
+    .btn-default:hover {
+        color: white;
+    }
+
+    .titulo {
+        margin-top: 55px;
+        margin-bottom: 40px;
+    }
+</style>
+<h2 class="titulo"> @ViewData["Title"] </h2>
+
+<h6>Filtro de livros</h6>
+
+@using (Html.BeginForm("Filtro", "Livro", FormMethod.Post))
+{
+    <label for="dataInicio">Data de Início:</label>
+    <input type="date" name="dataInicio" required>
+
+    <label for="dataFim">Data de Fim:</label>
+    <input type="date" name="dataFim" required>
+
+    <input class="btn-default" type="submit" value="Filtrar">
+}
+
+<p> <a asp-action="Criar" class="btn btn-default"> Criar novo </a></p>
+<p> <a asp-action="Listar" class="btn btn-default"> Listar em Grade </a></p>
+<table class="table table-dark table-striped-columns">
+    <thead>
+        <tr class="success">
+            <th>
+                @*Renderiza os conteudos passados*@
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @*Renderiza os conteudos passados*@
+                @Html.DisplayNameFor(model => model.Genero)
+            </th>
+            <th>
+                @*Renderiza os conteudos passados*@
+                @Html.DisplayNameFor(model => model.AnoPublicacao)
+            </th>
+            <th>
+                @*Renderiza os conteudos passados*@
+                @Html.DisplayNameFor(model => model.NumeroPaginas)
+            </th>
+            <th>
+                @*Renderiza os conteudos passados*@
+                @Html.DisplayNameFor(model => model.Sinopse)
+            </th>
+            <th>
+                @*Renderiza os conteudos passados*@
+                @Html.DisplayNameFor(model => model.Disponibilidade)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderByDescending(i => i.Id))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AnoPublicacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroPaginas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sinopse)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Disponibilidade)
+                </td>
+                <td>
+                    @*Passa o Id do vendedor que eu clica no asp-route-id*@
+                    @*Quando algum desses for clicado vai acionar o método do controlador*@
+                    <a asp-action="Editar" asp-route-id="@item.Id"> Editar </a>
+                    <a asp-action="Details" asp-route-id="@item.Id"> Details </a>
+                    <a asp-action="Deletar" asp-route-id="@item.Id"> Delete </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

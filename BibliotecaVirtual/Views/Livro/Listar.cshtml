@@ -3,7 +3,7 @@
 *@
 @model IEnumerable<BibliotecaVirtual.Models.Livro>
 @{
-    ViewData["Title"] = "Livros";
+    ViewData["Title"] = "Listagem de Livros";
 
 }
 <style>
@@ -16,85 +16,89 @@
     .btn-default:hover {
         color: white;
     }
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .shelf {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        padding: 20px;
+        background-color: #f4f4f4;
+    }
+
+    .book {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin: 10px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .book img {
+        max-width: 100%;
+        height: auto;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .book h3 {
+        margin-top: 10px;
+        font-size: 1.2em;
+    }
+
+    .book p {
+        margin: 5px 0;
+        font-size: 0.8em;
+        color: #666;
+    }
+    .titulo{
+        margin-top: 55px;
+        margin-bottom: 40px;
+    }
 </style>
+<body>
+    <h2 class="titulo"> @ViewData["Title"] </h2>
 
+    <h6>Filtro de livros</h6>
 
+    @using (Html.BeginForm("Filtro", "Livro", FormMethod.Post))
+    {
+        <label for="dataInicio">Data de Início:</label>
+        <input type="date" name="dataInicio" required>
 
-<h2> @ViewData["Title"] </h2>
+        <label for="dataFim">Data de Fim:</label>
+        <input type="date" name="dataFim" required>
 
-<h2>Filtro de livros</h2>
-
-@using (Html.BeginForm("Filtro", "Livro", FormMethod.Post))
-{
-    <label for="dataInicio">Data de Início:</label>
-    <input type="date" name="dataInicio" required>
-
-    <label for="dataFim">Data de Fim:</label>
-    <input type="date" name="dataFim" required>
-
-    <input type="submit" value="Filtrar">
-}
-
-<p> <a asp-action="Criar" class="btn btn-default"> Criar novo </a></p>
-<table class="table table-dark table-striped-columns">
-    <thead>
-        <tr class="success">
-            <th>
-                @*Renderiza os conteudos passados*@
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @*Renderiza os conteudos passados*@
-                @Html.DisplayNameFor(model => model.Genero)
-            </th>
-            <th>
-                @*Renderiza os conteudos passados*@
-                @Html.DisplayNameFor(model => model.AnoPublicacao)
-            </th>
-            <th>
-                @*Renderiza os conteudos passados*@
-                @Html.DisplayNameFor(model => model.NumeroPaginas)
-            </th>
-            <th>
-                @*Renderiza os conteudos passados*@
-                @Html.DisplayNameFor(model => model.Sinopse)
-            </th>
-            <th>
-                @*Renderiza os conteudos passados*@
-                @Html.DisplayNameFor(model => model.Disponibilidade)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
+        <input class="btn-default" type="submit" value="Filtrar">
+    }
+    <div> 
+        <p> <a asp-action="Criar" class="btn btn-default"> Criar novo </a></p>
+        <p> <a asp-action="ListarEmTabela" class="btn btn-default"> Listar em Tabela </a></p>
+    </div>
+<div class="shelf">
         @foreach (var item in Model.OrderByDescending(i => i.Id))
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Genero)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AnoPublicacao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumeroPaginas)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sinopse)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Disponibilidade)
-                </td>
-                <td>
+            <div class="book">
+                <img src="livro1.jpg" alt="Livro 1">
+                <h3>@Html.DisplayFor(modelItem => item.Name)</h3>
+                <p>Genero: @Html.DisplayFor(modelItem => item.Genero)</p>
+                <p>Ano: @Html.DisplayFor(modelItem => item.AnoPublicacao)</p>
+                <p>N° Paginas: @Html.DisplayFor(modelItem => item.NumeroPaginas)</p>
+                <p>Sinopse: @Html.DisplayFor(modelItem => item.Sinopse)</p>
+                <p>@Html.DisplayFor(modelItem => item.Disponibilidade)</p>
+                <div>
                     @*Passa o Id do vendedor que eu clica no asp-route-id*@
                     @*Quando algum desses for clicado vai acionar o método do controlador*@
                     <a asp-action="Editar" asp-route-id="@item.Id"> Editar </a>
                     <a asp-action="Details" asp-route-id="@item.Id"> Details </a>
                     <a asp-action="Deletar" asp-route-id="@item.Id"> Delete </a>
-                </td>
-            </tr>
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+</div>
+</body>

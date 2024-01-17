@@ -29,7 +29,10 @@ namespace BibliotecaVirtual.Controllers
             var viewModel = new LivroFormView();
             return View(viewModel);
         }
-
+        public IActionResult ListarEmTabela()
+        {
+            return View(_service.FindAll());
+        }
         [HttpPost]
         //impedir ataques csrf
         [ValidateAntiForgeryToken]
