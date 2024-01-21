@@ -24,13 +24,15 @@ namespace BibliotecaVirtual.Controllers
         {
             return View(_service.FindAll());
         }
-
         public async Task<IActionResult> Criar()
         {
             var viewModel = new LivroFormView();
             return View(viewModel);
         }
-
+        public IActionResult ListarEmTabela()
+        {
+            return View(_service.FindAll());
+        }
         [HttpPost]
         //impedir ataques csrf
         [ValidateAntiForgeryToken]
@@ -41,7 +43,7 @@ namespace BibliotecaVirtual.Controllers
                 return BadRequest("O livro não pode ser nulo");
             }
             await _service.CriarAsync(livro);
-            return Ok("Livro criado com sucesso " + livro);
+            return RedirectToAction(nameof(Listar));
         }
         public async Task<IActionResult> Editar(int id)
         {
@@ -62,7 +64,7 @@ namespace BibliotecaVirtual.Controllers
             }
             if (id != livro.Id)
             {
-                return Ok("Erro ao editar o livro");
+                return BadRequest("Erro ao editar o livro");
             }
             try
             {
@@ -71,13 +73,26 @@ namespace BibliotecaVirtual.Controllers
             }
             catch (Exception e)
             {
-                return Ok("Erro: " + e);
+                throw;
             }
         }
         public IActionResult Deletar(int id)
         {
             _service.Remove(id);
             return RedirectToAction(nameof(Listar));
+        }
+        public IActionResult Filtro()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Filtro(DateTime DataInicio, DateTime DataFim)
+        {
+            var dadosFiltrados = _context.Livros.Where(p => p
+            .AnoPublicacao >= DataInicio && p
+            .AnoPublicacao <= DataFim).ToList();
+
+            return View(dadosFiltrados);
         }
     }
 }
