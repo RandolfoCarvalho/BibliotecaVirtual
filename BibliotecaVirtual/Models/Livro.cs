@@ -21,8 +21,6 @@ namespace BibliotecaVirtual.Models
         public int NumeroPaginas { get; set; }
         [Required(ErrorMessage = "A {0} é obrigatória")]
         public string Sinopse { get; set; }
-        [Required(ErrorMessage = "A {0} é obrigatória")]
-        public DisponibilidadeLivro Disponibilidade { get; set; }
-
+        public DisponibilidadeLivro Disponibilidade { get; set; } = DisponibilidadeLivro.Disponivel;
     }
 }
